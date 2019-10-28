@@ -42,6 +42,18 @@ To check the correct behaviour, open a browser and go to 'localhost:8080/hello'
 
 You should see a message from the backend controller.
 
+
+Notes: The frontend part of the master scoreboard application runs within a tomcat server.
+If the tomcat is running on the local machine it runs on port 8080. Therefore, if we
+are to interact with the frontend during development we need to run this backend on a
+different port.
+
+We can set 'SERVER_PORT=9090' as an environment variable in the configuration, if running from the
+IDE, or if running from the command line:
+$ java -Dserver.port=9090 -jar target/msBackEnd-1.0-SNAPSHOT.jar
+
+
+
 When deploying to AWS bear in mind the following:
 
 Platform: Java 8 running on 64bit Amazon Linux/2.10.0
