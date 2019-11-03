@@ -49,8 +49,6 @@ public class BackendController {
         dataSource = StringHelper.splitBeforeAndAfter(dataSource, beforePart, "Number of Cards Processed");
         competition.addResultsToCompetition(dataSource);
         competition.addGolfersToCompetition();
-        Collections.sort(competition.golfers);
-        competition.updateRankings();
         return competition.golfers;
     }
 
