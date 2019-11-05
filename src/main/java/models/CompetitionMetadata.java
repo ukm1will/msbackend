@@ -52,4 +52,3 @@ public class CompetitionMetadata {
     }
 }
 
-// TODO: tidy up this file, check if we need setDate etc, constructor

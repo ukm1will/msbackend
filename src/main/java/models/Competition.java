@@ -35,7 +35,7 @@ public class Competition {
         return scoringSystem;
     }
 
-    private void setScoringSystem(String dataSource) {
+    public void setScoringSystem(String dataSource) {
         if (dataSource.contains("pts"))
             this.scoringSystem = ScoringSystem.STABLEFORD;
         else
@@ -72,12 +72,6 @@ public class Competition {
         return null;
     }
 
-    public void updateRankings() {
-        // After sorting, the position will no longer be accurate, therefore they need to be re-adjusted
-        for (int i = 0; i < golfers.size(); i++) {
-            golfers.get(i).setPosition(i + 1);
-        }
-    }
 
     public MasterScoreboardFormat getFormat(String currentDataFile) {
         return this.masterScoreboardFormat;

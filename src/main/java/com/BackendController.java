@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import service.StringHelper;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 import static service.LoginService.autoLogin;
@@ -39,9 +38,8 @@ public class BackendController {
         return urlConverter.getCompetitionMetadata();
     }
 
-
     @RequestMapping(method = RequestMethod.GET, value = "/view/{viewId}", produces = "application/json")
-    public List<Golfer> getView(@PathVariable("viewId") final int viewId) throws Exception {
+    public List<Golfer> getGolfers(@PathVariable("viewId") final int viewId) throws Exception {
         String url = "http://masterscoreboard.co.uk/results/Result.php?CWID=5142&View=" + viewId;
         String dataSource = getDataSource(url, DataResponseType.TEXT);
         Competition competition = new Competition(dataSource);
@@ -59,5 +57,4 @@ public class BackendController {
         return dataResponseType == DataResponseType.HTML ? page.getWebResponse().getContentAsString() : page.asText();
     }
 }
-
 
