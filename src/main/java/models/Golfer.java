@@ -4,7 +4,7 @@ import enums.ScoringSystem;
 
 public class Golfer implements Comparable {
 
-    public String[] parts;
+    private String[] parts;
     private String[] partsOfScore;
     private String[] partsOfName;
     private int gross;
@@ -13,11 +13,14 @@ public class Golfer implements Comparable {
     private int position;
     private int pts;
     private String forename;
-
     private String surname;
     private String fullName;
     private String countback;
     private String placing;
+
+    public void setParts(String[] parts) {
+        this.parts = parts;
+    }
 
     public int getPosition() {
         return position;
@@ -39,9 +42,8 @@ public class Golfer implements Comparable {
         return handicap;
     }
 
-    public void assignAttributes(ScoringSystem scoringSystem) {
-        partsOfScore = this.parts[2].split(" ");
-        handicap = calculateHandicap();
+
+    private void handlePointsAndGross(ScoringSystem scoringSystem) {
         if (scoringSystem == ScoringSystem.STABLEFORD) {
             pts = calculatePoints();
             gross = calculateGross();
@@ -51,6 +53,37 @@ public class Golfer implements Comparable {
         } else {
             throw new UnsupportedOperationException("Trouble at mill in Golfer");
         }
+    }
+
+
+    private void handlePlacingAndCountback() {
+        switch (parts.length) {
+            case 3:
+                placing = "";
+                countback = "";
+                break;
+            case 4:
+                placing = parts[3];
+                countback = "";
+                break;
+            case 5:
+                if ("".equals(parts[3])) {
+                    placing = "";
+                    countback = parts[4];
+                } else {
+                    placing = parts[3];
+                    countback = parts[4];
+                }
+        }
+    }
+
+
+    public void assignAttributes(ScoringSystem scoringSystem) {
+
+        partsOfScore = this.parts[2].split(" ");
+        handicap = calculateHandicap();
+
+        handlePointsAndGross(scoringSystem);
 
         nett = gross - handicap;
         partsOfName = this.parts[1].split(",");
@@ -61,23 +94,7 @@ public class Golfer implements Comparable {
 
         fullName = forename + ' ' + surname;
 
-        if (parts.length == 3) {
-            placing = "";
-            countback = "";
-        } else if (parts.length == 4) {
-            placing = parts[3];
-            countback = "";
-        } else if (parts.length == 5) {
-            if ("".equals(parts[3])) {
-                placing = "";
-                countback = parts[4];
-            } else {
-                placing = parts[3];
-                countback = parts[4];
-            }
-        } else {
-            throw new UnsupportedOperationException("Trouble at mill in Golfer");
-        }
+        handlePlacingAndCountback();
     }
 
 

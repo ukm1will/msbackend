@@ -20,16 +20,15 @@ public class Competition {
         this.setMasterScoreboardFormat(currentDataFile);
     }
 
-    public void setMasterScoreboardFormat(String dataSource) {
-        if(dataSource.contains("Revised")) {
-            this.masterScoreboardFormat = MasterScoreboardFormat.MS_OLD;
-        }
-        else
-            this.masterScoreboardFormat = MasterScoreboardFormat.MS_NEW;
-    }
-
     public MasterScoreboardFormat getMasterScoreboardFormat() {
         return masterScoreboardFormat;
+    }
+
+    public void setMasterScoreboardFormat(String dataSource) {
+        if (dataSource.contains("Revised"))
+            this.masterScoreboardFormat = MasterScoreboardFormat.MS_OLD;
+        else
+            this.masterScoreboardFormat = MasterScoreboardFormat.MS_NEW;
     }
 
     public ScoringSystem getScoringSystem() {
@@ -51,7 +50,7 @@ public class Competition {
     public void addGolfersToCompetition() {
         for (String result : results) {
             Golfer golfer = new Golfer();
-            golfer.parts = Split.rowByTab(result);
+            golfer.setParts(Split.rowByTab(result));
             if (firstCharOfStringIsDigit(result)) {
                 golfer.assignAttributes(this.scoringSystem);
                 golfers.add(golfer);
