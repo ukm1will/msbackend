@@ -1,6 +1,7 @@
 package stableford;
 
 import data.ViewData5337;
+import data.ViewData5361;
 import models.Competition;
 import models.Golfer;
 import org.junit.Test;
@@ -9,14 +10,14 @@ import service.StringHelper;
 import static enums.ScoringSystem.STABLEFORD;
 import static org.junit.Assert.assertEquals;
 
-public class View5337 {
+public class View5361 {
 
-    private final String currentDataFile = ViewData5337.WHOLE_PAGE;
+    private final String currentDataFile = ViewData5361.WHOLE_PAGE;
     private Competition competition = new Competition(currentDataFile);
     private String beforePart;
     private String afterPart;
 
-    public View5337() throws Exception {
+    public View5361() throws Exception {
         beforePart = StringHelper.getBeforePart(competition.getMasterScoreboardFormat());
         afterPart = "Number of Cards Processed";
     }
@@ -30,7 +31,7 @@ public class View5337 {
     public void ShouldAddResultsToCompetition() {
         String activeData = StringHelper.splitBeforeAndAfter(currentDataFile, beforePart, afterPart);
         competition.addResultsToCompetition(activeData);
-        assertEquals(22, competition.results.size());
+        assertEquals(61, competition.results.size());
     }
 
     @Test
@@ -38,35 +39,20 @@ public class View5337 {
         String activeData = StringHelper.splitBeforeAndAfter(currentDataFile, beforePart, afterPart);
         competition.addResultsToCompetition(activeData);
         competition.addGolfersToCompetition();
-        assertEquals(22, competition.golfers.size());
+        assertEquals(59, competition.golfers.size());
     }
 
     @Test
-    public void ShouldHaveCorrectDataForGuydonCerasuolo() throws Exception {
+    public void ShouldHaveCorrectDataForPaulWilliams() throws Exception {
         String activeData = StringHelper.splitBeforeAndAfter(currentDataFile, beforePart, afterPart);
         competition.addResultsToCompetition(activeData);
         competition.addGolfersToCompetition();
-        Golfer guydonCerasuolo = competition.find("Guydon Cerasuolo");
-        assertEquals("Guydon Cerasuolo", guydonCerasuolo.getFullName());
-        assertEquals(101, guydonCerasuolo.getGross());
-        assertEquals(80, guydonCerasuolo.getNett());
-        assertEquals(21, guydonCerasuolo.getHandicap());
-        assertEquals(28, guydonCerasuolo.getPts());
-    }
-
-    @Test
-    public void ShouldHaveCorrectDataForEdnyfedMorgan() throws Exception {
-        String activeData = StringHelper.splitBeforeAndAfter(currentDataFile, beforePart, afterPart);
-        competition.addResultsToCompetition(activeData);
-        competition.addGolfersToCompetition();
-        Golfer edMorgan = competition.find("Ednyfed O. Morgan");
-        assertEquals("Ednyfed O. Morgan", edMorgan.getFullName());
-        assertEquals(5, edMorgan.getPosition());
-        assertEquals(86, edMorgan.getGross());
-        assertEquals(76, edMorgan.getNett());
-        assertEquals(10, edMorgan.getHandicap());
-        assertEquals(32, edMorgan.getPts());
-
+        Golfer paulWilliams = competition.find("Paul Williams");
+        assertEquals("Paul Williams", paulWilliams.getFullName());
+        assertEquals(87, paulWilliams.getGross());
+        assertEquals(72, paulWilliams.getNett());
+        assertEquals(15, paulWilliams.getHandicap());
+        assertEquals(36, paulWilliams.getPts());
     }
 
     @Test
@@ -74,13 +60,13 @@ public class View5337 {
         String activeData = StringHelper.splitBeforeAndAfter(currentDataFile, beforePart, afterPart);
         competition.addResultsToCompetition(activeData);
         competition.addGolfersToCompetition();
-        Golfer guydonCerasuolo = competition.find("Guydon Cerasuolo");
-        assertEquals("Cerasuolo", guydonCerasuolo.getSurname());
+        Golfer paulWilliams = competition.find("Paul Williams");
+        assertEquals("Williams", paulWilliams.getSurname());
     }
 
 
     @Test
-    public void BMDobsonShouldHaveCorrectPlacingAndCountback() {
+    public void PaulWilliamsShouldHaveCorrectPlacingAndCountback() {
         String activeData = StringHelper.splitBeforeAndAfter(currentDataFile, beforePart, afterPart);
         competition.addResultsToCompetition(activeData);
         competition.addGolfersToCompetition();
@@ -89,14 +75,6 @@ public class View5337 {
         assertEquals("", bDobson.getCountback());
     }
 
-    @Test
-    public void  ColinHarrisShouldHaveCorrectPlacingAndCountback() {
-        String activeData = StringHelper.splitBeforeAndAfter(currentDataFile, beforePart, afterPart);
-        competition.addResultsToCompetition(activeData);
-        competition.addGolfersToCompetition();
-        Golfer colinHarris = competition.find("Colin Harris");
-        assertEquals("", colinHarris.getPlacing());
-        assertEquals("Last Nine Holes", colinHarris.getCountback());
-    }
+// Test another placing and countback here
 
 }
