@@ -2,6 +2,7 @@ package models;
 
 import enums.MasterScoreboardFormat;
 import enums.ScoringSystem;
+import service.Split;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,7 +43,6 @@ public class Competition {
             this.scoringSystem = ScoringSystem.MEDAL;
     }
 
-
     public void addResultsToCompetition(String str) {
         String[] nextSplit = str.split("\n");
         Collections.addAll(results, nextSplit);
@@ -51,7 +51,7 @@ public class Competition {
     public void addGolfersToCompetition() {
         for (String result : results) {
             Golfer golfer = new Golfer();
-            golfer.split(result);
+            golfer.parts = Split.rowByTab(result);
             if (firstCharOfStringIsDigit(result)) {
                 golfer.assignAttributes(this.scoringSystem);
                 golfers.add(golfer);

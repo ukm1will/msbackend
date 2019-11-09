@@ -34,7 +34,7 @@ $ mvn clean package
 
 You should establish that the JAR file produces the correct behaviour via the command:
 
-$ java -jar target/msBackEnd-1.0-SNAPSHOT.jar
+$ java -jar target/msbackend-1.0-SNAPSHOT.jar
 
 The correct behaviour in this instance being to start the Spring Boot application on port 8080.
 
@@ -50,7 +50,7 @@ different port.
 
 We can set 'SERVER_PORT=9090' as an environment variable in the configuration, if running from the
 IDE, or if running from the command line:
-$ java -Dserver.port=9090 -jar target/msBackEnd-1.0-SNAPSHOT.jar
+$ java -Dserver.port=9090 -jar target/msbackend-1.0-SNAPSHOT.jar
 
 
 

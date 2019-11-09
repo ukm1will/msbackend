@@ -4,18 +4,20 @@ import enums.ScoringSystem;
 
 public class Golfer implements Comparable {
 
+    public String[] parts;
     private String[] partsOfScore;
     private String[] partsOfName;
-
     private int gross;
     private int nett;
     private int handicap;
     private int position;
     private int pts;
     private String forename;
+
     private String surname;
     private String fullName;
-    private String[] parts;
+    private String countback;
+    private String placing;
 
     public int getPosition() {
         return position;
@@ -46,8 +48,7 @@ public class Golfer implements Comparable {
         } else if (scoringSystem == ScoringSystem.MEDAL) {
             pts = -1;
             gross = Integer.parseInt(partsOfScore[0]);
-        }
-        else {
+        } else {
             throw new UnsupportedOperationException("Trouble at mill in Golfer");
         }
 
@@ -59,6 +60,24 @@ public class Golfer implements Comparable {
         forename = partsOfName[1].trim();
 
         fullName = forename + ' ' + surname;
+
+        if (parts.length == 3) {
+            placing = "";
+            countback = "";
+        } else if (parts.length == 4) {
+            placing = parts[3];
+            countback = "";
+        } else if (parts.length == 5) {
+            if ("".equals(parts[3])) {
+                placing = "";
+                countback = parts[4];
+            } else {
+                placing = parts[3];
+                countback = parts[4];
+            }
+        } else {
+            throw new UnsupportedOperationException("Trouble at mill in Golfer");
+        }
     }
 
 
@@ -68,12 +87,9 @@ public class Golfer implements Comparable {
         return expectedGross - ptsOver36;
     }
 
+
     private int calculatePoints() {
         return Integer.parseInt(partsOfScore[0]);
-    }
-
-    void split(String s) {
-        this.parts = s.split("\t");
     }
 
     private int calculateHandicap() {
@@ -107,4 +123,17 @@ public class Golfer implements Comparable {
     public String getSurname() {
         return surname;
     }
+
+    public String getForename() {
+        return forename;
+    }
+
+    public String getCountback() {
+        return countback;
+    }
+
+    public String getPlacing() {
+        return placing;
+    }
+
 }
