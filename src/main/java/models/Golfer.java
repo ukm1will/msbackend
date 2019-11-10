@@ -57,6 +57,13 @@ public class Golfer implements Comparable {
 
 
     private void handlePlacingAndCountback() {
+        if(parts.length == 6)
+            handleResultWithRevisedHandicap();
+        else
+            handleResultWithoutRevisedHandicap();
+    }
+
+    private void handleResultWithoutRevisedHandicap() {
         switch (parts.length) {
             case 3:
                 placing = "";
@@ -74,7 +81,13 @@ public class Golfer implements Comparable {
                     placing = parts[3];
                     countback = parts[4];
                 }
+
         }
+    }
+
+    private void handleResultWithRevisedHandicap() {
+        placing = parts[3];
+        countback = parts[4];
     }
 
 

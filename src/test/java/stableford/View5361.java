@@ -35,7 +35,7 @@ public class View5361 {
     }
 
     @Test
-    public void ShouldAddGolfersToCompetition() throws Exception {
+    public void ShouldAddGolfersToCompetition() {
         String activeData = StringHelper.splitBeforeAndAfter(currentDataFile, beforePart, afterPart);
         competition.addResultsToCompetition(activeData);
         competition.addGolfersToCompetition();
@@ -43,7 +43,7 @@ public class View5361 {
     }
 
     @Test
-    public void ShouldHaveCorrectDataForPaulWilliams() throws Exception {
+    public void ShouldHaveCorrectDataForPaulWilliams() {
         String activeData = StringHelper.splitBeforeAndAfter(currentDataFile, beforePart, afterPart);
         competition.addResultsToCompetition(activeData);
         competition.addGolfersToCompetition();
@@ -56,7 +56,7 @@ public class View5361 {
     }
 
     @Test
-    public void ShouldHaveCorrectSurnameForGuydonCerasuolo() throws Exception {
+    public void ShouldHaveCorrectSurnameForPaulWilliams()  {
         String activeData = StringHelper.splitBeforeAndAfter(currentDataFile, beforePart, afterPart);
         competition.addResultsToCompetition(activeData);
         competition.addGolfersToCompetition();
@@ -70,11 +70,19 @@ public class View5361 {
         String activeData = StringHelper.splitBeforeAndAfter(currentDataFile, beforePart, afterPart);
         competition.addResultsToCompetition(activeData);
         competition.addGolfersToCompetition();
-        Golfer bDobson = competition.find("B. M. Dobson");
-        assertEquals("Overall Winner", bDobson.getPlacing());
-        assertEquals("", bDobson.getCountback());
+        Golfer paulWilliams = competition.find("Paul Williams");
+        assertEquals("Overall Runner-Up", paulWilliams.getPlacing());
+        assertEquals("Last Three Holes", paulWilliams.getCountback());
     }
 
-// Test another placing and countback here
 
+    @Test
+    public void ChrisHolwillShouldHaveCorrectPlacingAndCountback() {
+        String activeData = StringHelper.splitBeforeAndAfter(currentDataFile, beforePart, afterPart);
+        competition.addResultsToCompetition(activeData);
+        competition.addGolfersToCompetition();
+        Golfer chrisHolwill = competition.find("Chris Holwill");
+        assertEquals("", chrisHolwill.getPlacing());
+        assertEquals("", chrisHolwill.getCountback());
+    }
 }
