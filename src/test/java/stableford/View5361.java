@@ -1,6 +1,5 @@
 package stableford;
 
-import data.ViewData5337;
 import data.ViewData5361;
 import models.Competition;
 import models.Golfer;
@@ -16,37 +15,36 @@ public class View5361 {
     private Competition competition = new Competition(currentDataFile);
     private String beforePart;
     private String afterPart;
+    private String activeData;
 
     public View5361() throws Exception {
         beforePart = StringHelper.getBeforePart(competition.getMasterScoreboardFormat());
         afterPart = "Number of Cards Processed";
+        activeData = StringHelper.splitBeforeAndAfter(currentDataFile, beforePart, afterPart);
+        competition.addResultsToCompetition(activeData);
+        competition.addGolfersToCompetition();
     }
 
     @Test
-    public void CompetitionShouldBeStableford() {
+    public void ShouldBeStablefordCompetition() {
         assertEquals(STABLEFORD, competition.getScoringSystem());
     }
 
     @Test
-    public void ShouldAddResultsToCompetition() {
-        String activeData = StringHelper.splitBeforeAndAfter(currentDataFile, beforePart, afterPart);
-        competition.addResultsToCompetition(activeData);
+    public void ShouldHaveCorrectNofResults() {
+
         assertEquals(61, competition.results.size());
     }
 
     @Test
-    public void ShouldAddGolfersToCompetition() {
-        String activeData = StringHelper.splitBeforeAndAfter(currentDataFile, beforePart, afterPart);
-        competition.addResultsToCompetition(activeData);
-        competition.addGolfersToCompetition();
+    public void ShouldHaveCorrectNofGolfers() {
+
         assertEquals(59, competition.golfers.size());
     }
 
     @Test
-    public void ShouldHaveCorrectDataForPaulWilliams() {
-        String activeData = StringHelper.splitBeforeAndAfter(currentDataFile, beforePart, afterPart);
-        competition.addResultsToCompetition(activeData);
-        competition.addGolfersToCompetition();
+    public void ShouldHaveCorrectData() {
+
         Golfer paulWilliams = competition.find("Paul Williams");
         assertEquals("Paul Williams", paulWilliams.getFullName());
         assertEquals(87, paulWilliams.getGross());
@@ -56,20 +54,14 @@ public class View5361 {
     }
 
     @Test
-    public void ShouldHaveCorrectSurnameForPaulWilliams()  {
-        String activeData = StringHelper.splitBeforeAndAfter(currentDataFile, beforePart, afterPart);
-        competition.addResultsToCompetition(activeData);
-        competition.addGolfersToCompetition();
+    public void ShouldHaveCorrectSurname() {
         Golfer paulWilliams = competition.find("Paul Williams");
         assertEquals("Williams", paulWilliams.getSurname());
     }
 
 
     @Test
-    public void PaulWilliamsShouldHaveCorrectPlacingAndCountback() {
-        String activeData = StringHelper.splitBeforeAndAfter(currentDataFile, beforePart, afterPart);
-        competition.addResultsToCompetition(activeData);
-        competition.addGolfersToCompetition();
+    public void ShouldHaveCorrectPlacingAndCountbackOne() {
         Golfer paulWilliams = competition.find("Paul Williams");
         assertEquals("Overall Runner-Up", paulWilliams.getPlacing());
         assertEquals("Last Three Holes", paulWilliams.getCountback());
@@ -77,10 +69,7 @@ public class View5361 {
 
 
     @Test
-    public void ChrisHolwillShouldHaveCorrectPlacingAndCountback() {
-        String activeData = StringHelper.splitBeforeAndAfter(currentDataFile, beforePart, afterPart);
-        competition.addResultsToCompetition(activeData);
-        competition.addGolfersToCompetition();
+    public void ShouldHaveCorrectPlacingAndCountbackTwo() {
         Golfer chrisHolwill = competition.find("Chris Holwill");
         assertEquals("", chrisHolwill.getPlacing());
         assertEquals("", chrisHolwill.getCountback());
