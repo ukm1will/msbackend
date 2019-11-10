@@ -13,14 +13,11 @@ public class View5337 {
 
     private final String currentDataFile = ViewData5337.WHOLE_PAGE;
     private Competition competition = new Competition(currentDataFile);
-    private String beforePart;
-    private String afterPart;
-    private String activeData;
 
     public View5337() throws Exception {
-        beforePart = StringHelper.getBeforePart(competition.getMasterScoreboardFormat());
-        afterPart = "Number of Cards Processed";
-        activeData = StringHelper.splitBeforeAndAfter(currentDataFile, beforePart, afterPart);
+        String beforePart = StringHelper.getBeforePart(competition.getMasterScoreboardFormat());
+        String afterPart = "Number of Cards Processed";
+        String activeData = StringHelper.splitBeforeAndAfter(currentDataFile, beforePart, afterPart);
         competition.addResultsToCompetition(activeData);
         competition.addGolfersToCompetition();
     }

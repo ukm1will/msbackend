@@ -13,14 +13,11 @@ public class View5361 {
 
     private final String currentDataFile = ViewData5361.WHOLE_PAGE;
     private Competition competition = new Competition(currentDataFile);
-    private String beforePart;
-    private String afterPart;
-    private String activeData;
 
     public View5361() throws Exception {
-        beforePart = StringHelper.getBeforePart(competition.getMasterScoreboardFormat());
-        afterPart = "Number of Cards Processed";
-        activeData = StringHelper.splitBeforeAndAfter(currentDataFile, beforePart, afterPart);
+        String beforePart = StringHelper.getBeforePart(competition.getMasterScoreboardFormat());
+        String afterPart = "Number of Cards Processed";
+        String activeData = StringHelper.splitBeforeAndAfter(currentDataFile, beforePart, afterPart);
         competition.addResultsToCompetition(activeData);
         competition.addGolfersToCompetition();
     }
@@ -32,7 +29,6 @@ public class View5361 {
 
     @Test
     public void ShouldHaveCorrectNofResults() {
-
         assertEquals(61, competition.results.size());
     }
 

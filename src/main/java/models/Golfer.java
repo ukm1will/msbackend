@@ -15,8 +15,8 @@ public class Golfer implements Comparable {
     private String forename;
     private String surname;
     private String fullName;
-    private String countback;
     private String placing;
+    private String countback;
 
     public void setParts(String[] parts) {
         this.parts = parts;
